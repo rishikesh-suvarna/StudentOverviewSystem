@@ -24,10 +24,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true); 
 
-// Requiring Routes
-var adminRoutes   = require('./routes/admin'),
-    teacherRoutes = require('./routes/teachers'),
-    studentRoutes = require('./routes/students');
+
 
 // Setting Up Express-session
 app.use(require("express-session")({
@@ -48,8 +45,13 @@ app.use(flash());
 
 // Database Connection
 const mongoURI = process.env.MONGODB_URL;
-mongoose.connect(mongoURI, {useUnifiedTopology: true });
+mongoose.connect(mongoURI);
 const conn = mongoose.createConnection(mongoURI);
+
+// Requiring Routes
+var adminRoutes   = require('./routes/admin'),
+    teacherRoutes = require('./routes/teachers'),
+    studentRoutes = require('./routes/students');
 
 // <==========================================================Passport-Config===========================================>
 passport.use('teacherLocal', new LocalStrategy(

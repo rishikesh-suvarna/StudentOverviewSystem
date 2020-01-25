@@ -9,7 +9,7 @@ var express = require("express"),
     middleware = require('../middleware');
 
 // ==============================================================================
-const mongoURI = 'process.env.MONGODB_URL';
+const mongoURI = process.env.MONGODB_URL;
 const conn = mongoose.createConnection(mongoURI, {useUnifiedTopology: true });
 
 let gfs;
