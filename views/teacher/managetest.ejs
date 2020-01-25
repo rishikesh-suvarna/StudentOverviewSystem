@@ -11,8 +11,8 @@
             <div class="card-header"><em><%= file.metadata.title %></em></div>
             <div class="card-body">
             <div class="card-title"><strong>Uploaded on: </strong><%= file.uploadDate.toDateString() %></div>
-            <% if(file.metadata.desc){ %>
-                <p class="card-text"><strong>Description: </strong><%= file.metadata.desc.substring(0, 25) %>...</p>
+            <% if(file.metadata.description){ %>
+                <p class="card-text"><strong>Description: </strong><%= file.metadata.description.substring(0, 25) %>...</p>
             <% } else { %>
                 <p class="card-text"><strong>Description: </strong>null</p>
             <% } %>

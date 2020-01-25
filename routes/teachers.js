@@ -36,7 +36,7 @@ const storage = new GridFsStorage({
           }
           const metadata = {
               title: req.body.title,
-              desc: req.body.desc,
+              description: req.body.description,
               id: req.user._id,
               by: req.user.name,
           };
