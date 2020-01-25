@@ -38,8 +38,8 @@ const storage = new GridFsStorage({
               id: req.user._id,
               by: req.user.name,
               title: req.body.title,
-              desc: req.body.desc
-          }
+              desc: req.body.desc,
+          };
           const filename = buf.toString('hex') + path.extname(file.originalname);
           const fileInfo = {
             filename: filename,
