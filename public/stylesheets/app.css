@@ -1,0 +1,28 @@
+html, body {
+    font-family: 'Raleway', sans-serif;
+    background: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat;
+    /* background: url("https://media.giphy.com/media/Pp9W9tuVF5NwQ/giphy.gif") no-repeat; */
+    widows: 100%;
+    height: 100vh;
+    background-size: 100%;
+}
+
+.jumbotron {
+    background: url("https://images.pexels.com/photos/917494/pexels-photo-917494.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    border-radius: 10px;
+}
+
+/* .bg {
+    background: url("https://images.pexels.com/photos/583846/pexels-photo-583846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat;
+    widows: 100%;
+    height: 100vh;
+    background-size: 100%;
+} */
+
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+}
+

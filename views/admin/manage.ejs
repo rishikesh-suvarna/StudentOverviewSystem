@@ -1,0 +1,26 @@
+<%- include ("../partials/header") %> 
+<h1 class="mb-5">All Teachers</h1>
+
+<div class="row">
+    <% teachers.forEach(function(teacher){ %>
+    <div class="col-md-4">
+        <div class="card border-dark mb-3" style="border-radius: 10px; box-shadow: 0px 0px 10px 0px #000;">
+            <div class="card-header"><strong>Name:</strong> <%= teacher.name %> </div>
+            <div class="card-body">
+              <h5 class="card-title"><strong>Username:</strong> <%= teacher.username %></h5>
+              <p class="card-text"><strong>Email:</strong> <%= teacher.email %></p>
+              <a href="/admin/manage/<%= teacher._id %>/edit" class="btn btn-outline-warning btn-block">Edit Teacher Info</a>
+              <a href="/admin/manage/<%= teacher._id %>/resetpassword" class="btn btn-outline-primary btn-block mt-2">Reset Password</a>
+              <form action="/admin/manage/<%= teacher._id %>?_method=DELETE" class="delete-form" style="display: inline;" method="POST">
+                  <button data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-danger btn-block mt-2">Delete</button>
+              </form>
+            </div>
+          </div>
+    </div>
+    <% }) %>
+</div>
+<a href="/admin"><i class="fas fa-angle-left"></i>&nbsp;Go Back</a>
+
+
+
+<%- include ("../partials/footer") %> 

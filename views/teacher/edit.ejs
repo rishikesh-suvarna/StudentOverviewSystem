@@ -1,0 +1,29 @@
+<%- include ("../partials/header") %> 
+
+
+<!-- <form action="/teachers/manage/<%= student._id %>/edit?_method=PUT" method="POST">
+    <input type="text" name="student[name]" value="<%= student.name %>">
+    <input type="text" name="student[email]" value="<%= student.email %>">
+    <input type="text" name="student[username]" value="<%= student.username %>">
+    <button>Update Student</button>
+</form> -->
+
+<div class="row">
+    <div class="col-md-6" style="float: none; margin: auto;">
+        <form class="form-container" action="/teachers/manage/<%= student._id %>/edit?_method=PUT" method="POST">
+            <h1 class="mb-3" style="text-align: center;">Update Student: <%= student.name %></h1>
+            <div class="input-group mb-3">
+                <input type="text" name="student[name]" class="form-control" value="<%= student.name %>" required>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" name="student[email]" class="form-control" value="<%= student.email %>" required>
+            </div>
+            <div class="input-group mb-3">
+                <input type="text" name="student[username]" class="form-control" value="<%= student.username %>" required>
+            </div>
+            <button class="btn btn-outline-warning btn-block">Update Student</button>
+        </form>
+    </div>
+</div>
+
+<%- include ("../partials/footer") %> 
