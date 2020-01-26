@@ -77,25 +77,25 @@ router.post('/teachers/add', middleware.isLoggedIn, (req, res) => {
         password = req.body.password,
         designation = "Student";
 
-        var newStudent = new Student ({
-            name: name,
-            email: email,
-            username: username,
-            password: password,
-            designation: designation
-        });
+    var newStudent = new Student ({
+        name: name,
+        email: email,
+        username: username,
+        password: password,
+        designation: designation
+    });
 
-        Student.createUser(newStudent, function(err, student){
-            if(err) throw err;
-            else {
-                console.log("success");
-                Teacher.findById(req.user._id, function(err, teacher){
-                    teacher.myStudents.push(student);
-                    teacher.save();
-                });
-                res.redirect('/teachers');
-            }
-        });
+    Student.createUser(newStudent, function(err, student){
+        if(err) throw err;
+        else {
+            console.log("success");
+            Teacher.findById(req.user._id, function(err, teacher){
+                teacher.myStudents.push(student);
+                teacher.save();
+            });
+            res.redirect('/teachers');
+        }
+    });
 });
 
 router.get('/teachers/manage', middleware.isLoggedIn, (req, res) =>{
