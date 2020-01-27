@@ -1,6 +1,28 @@
 <%- include ("../partials/header") %> 
-<h1>Student</h1>
+<h1>Student: <%= currentUser.username %></h1>
+&nbsp;
 
-<h1><%= currentUser.username %></h1>
+
+
+<div class="row" style="text-align: center;">
+    <div class="col-md-6 mb-4">
+        <div class="card form-container">
+            <div class="card-body">
+            <h5 class="card-title">View Attendance</h5>
+            <p class="card-text">View Attendance Records</p>
+            <a href="#" class="btn btn-primary btn-block">View &nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card form-container">
+            <div class="card-body">
+            <h5 class="card-title">Show Tests</h5>
+            <p class="card-text">Show Tests Added By Your teacher</p>
+            <a href="/students/viewtest" class="btn btn-primary btn-block">Manage  &nbsp;&nbsp;<i class="fas fa-angle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%- include ("../partials/footer") %> 

@@ -16,7 +16,8 @@ middleware = require('../middleware');
 const mongoURI = process.env.MONGODB_URL;
 const conn = mongoose.createConnection(mongoURI, {useUnifiedTopology: true });
 
-// <=========================================== Storage Engine ================================================>
+// <======================================== GFS ==============================================================>
+
 let gfs;
 
 conn.once('open',() => {
@@ -25,6 +26,7 @@ conn.once('open',() => {
     // all set!
 });
 
+// <=========================================== Storage Engine ================================================>
 // Here
 const storage = new GridFsStorage({
     url: mongoURI,
@@ -75,6 +77,7 @@ router.post('/teachers/add', middleware.isLoggedIn, (req, res) => {
         email = req.body.email,
         username = req.body.username,
         password = req.body.password,
+        teacher = req.user._id,
         designation = "Student";
 
     var newStudent = new Student ({
@@ -82,6 +85,7 @@ router.post('/teachers/add', middleware.isLoggedIn, (req, res) => {
         email: email,
         username: username,
         password: password,
+        teacher: teacher,
         designation: designation
     });
 

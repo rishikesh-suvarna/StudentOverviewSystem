@@ -39,7 +39,7 @@
             <div class="card-body">
             <h5 class="card-title">Admin Login</h5>
             <p class="card-text">Add & Manage Teachers..</p>
-            <a href="/admin/login" data-toggle="tooltip" data-placement="bottom" title="Login as Admin" class="btn btn-primary btn-block">Login</a>
+            <a href="/admin/login" class="btn btn-primary btn-block">Login</a>
             </div>
         </div>
     </div>
@@ -50,9 +50,11 @@
             <h5 class="card-title">Teacher's Login</h5>
             <p class="card-text">Add & Manage Students..</p>
             <% if(!currentUser) { %>
-                <a href="/teachers/login" data-toggle="tooltip" data-placement="bottom" title="Login as Teacher" class="btn btn-primary btn-block">Login</a>
+                <a href="/teachers/login" class="btn btn-primary btn-block">Login</a>
+            <% } else if(currentUser.designation === "Teacher") { %>
+                <a href="/teachers" class="btn btn-primary btn-block">Login</a>
             <% } else { %>
-                <a href="/teachers" data-toggle="tooltip" data-placement="bottom" title="Login as Teacher" class="btn btn-primary btn-block">Login</a>
+                <a href="/teachers/login" class="btn btn-primary btn-block">Login</a>
             <% } %>
             </div>
         </div>
@@ -64,9 +66,11 @@
             <h5 class="card-title">Student's Login</h5>
             <p class="card-text">Complete Assignments & more..</p>
             <% if(!currentUser) { %>
-                <a href="/students/login" data-toggle="tooltip" data-placement="bottom" title="Login as Student" class="btn btn-primary btn-block">Login</a>
+                <a href="/students/login" class="btn btn-primary btn-block">Login</a>
+            <% } else if(currentUser.designation === "Student") { %>
+                <a href="/students" class="btn btn-primary btn-block">Login</a>
             <% } else { %>
-                <a href="/students" data-toggle="tooltip" data-placement="bottom" title="Login as Student" class="btn btn-primary btn-block">Login</a>
+                <a href="/students/login" class="btn btn-primary btn-block">Login</a>
             <% } %>
             </div>
         </div>

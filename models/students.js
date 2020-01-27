@@ -6,6 +6,7 @@ var studentSchema = new mongoose.Schema({
     email: String,
     username: String,
     password: String,
+    teacher: mongoose.Schema.Types.ObjectId,
     designation: String
 });
 

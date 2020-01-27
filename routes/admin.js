@@ -8,10 +8,10 @@ var express = require("express"),
     Teacher = require('../models/teachers'),
     middleware = require('../middleware');
 
-// ==============================================================================
+// <===================================== Database =========================================>
 const mongoURI = process.env.MONGODB_URL;
 const conn = mongoose.createConnection(mongoURI, {useUnifiedTopology: true });
-
+// <============================================ GFS =========================================>
 let gfs;
 
 conn.once('open',() => {
@@ -19,11 +19,12 @@ conn.once('open',() => {
     gfs.collection('uploads');
     // all set!
 });  
-
+// <====================================== Routes ================================================>
 router.get('/admin', (req, res) => 
     res.render('admin/index'));
 
 router.get('/admin/login', (req, res) => {
+    req.logOut();
     res.render('admin/login');
 });
 
