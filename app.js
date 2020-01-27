@@ -118,7 +118,10 @@ app.use(function(req, res, next){
 
 // ======================================= Routes ============================================================ //
 app.get('/', (req, res) => 
-    res.render('index'));
+res.render('landing'));
+
+app.get('/index', (req, res) => 
+res.render('index'));
 
 app.use(adminRoutes);
 app.use(teacherRoutes);

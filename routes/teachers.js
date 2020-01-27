@@ -226,7 +226,7 @@ router.get('/files/:filename', (req, res) => {
 
 router.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.redirect('/index');
 });
 
 module.exports = router;
