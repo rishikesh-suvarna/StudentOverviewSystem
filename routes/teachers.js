@@ -1,16 +1,17 @@
-var express = require("express"),
-router  = express.Router(),
+var express       = require("express"),
+router            = express.Router(),
 path              = require('path'),
 crypto            = require('crypto'),
 multer            = require('multer'),
 mongoose          = require('mongoose'),
 GridFsStorage     = require('multer-gridfs-storage'),
 Grid              = require('gridfs-stream'),
-passport = require('passport'),
-Student = require('../models/students'),
-Teacher = require('../models/teachers'),
-TestUploads = require('../models/testUploads'),
-middleware = require('../middleware');
+passport          = require('passport'),
+Student           = require('../models/students'),
+Teacher           = require('../models/teachers'),
+middleware        = require('../middleware');
+
+const {check, validationResult, body} = require('express-validator');
 
 //<============================================ Database URI =================================================>
 const mongoURI = process.env.MONGODB_URL;
@@ -68,11 +69,25 @@ router.post('/teachers/login', passport.authenticate('teacherLocal', {successRed
 });
 
 
-router.get('/teachers/add', (req, res) =>
-    res.render('teacher/add'));
+router.get('/teachers/add', middleware.isLoggedIn, (req, res) =>
+    res.render('teacher/add', {errors: false}));
 
-router.post('/teachers/add', middleware.isLoggedIn, (req, res) => {
-    
+router.post('/teachers/add', [
+    check('email', 'Invalid Email Id').isEmail(), 
+    check('password', 'Password should be 6 charcters or more').isLength({min: 5}),
+    body('cpassword').custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error('Password confirmation does not match password');
+        }
+        
+        // Indicates the success of this synchronous custom validator
+        return true;
+      })   
+    ], middleware.isLoggedIn, (req, res) => {
+    const errors = validationResult(req).array();
+    if (errors.length > 0) {
+        return res.render('teacher/add', {errors: errors});
+      }
     var name = req.body.name,
         email = req.body.email,
         username = req.body.username,

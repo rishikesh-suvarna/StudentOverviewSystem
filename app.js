@@ -16,8 +16,6 @@ const express         = require('express'),
     Student           = require('./models/students'),
     Teacher           = require('./models/teachers'),
     PORT              = process.env.PORT || 3000;   
-
-
 // Deprecations
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);

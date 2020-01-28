@@ -5,6 +5,7 @@ var express = require("express"),
     Grid              = require('gridfs-stream'),
     Student = require('../models/students'),
     bcrypt = require('bcryptjs'),
+    { check, validationResult, body } = require('express-validator'),
     Teacher = require('../models/teachers'),
     middleware = require('../middleware');
 
@@ -40,30 +41,46 @@ router.post('/admin/login', (req, res) => {
 });
 
 router.get('/admin/add', (req, res) => {
+    const errors = [];
     adminStatus = true;
-    res.render('admin/add')
+    res.render('admin/add', {errors: false});
 });
     
 
-router.post('/admin/add', (req, res) => {
-    var name = req.body.name,
+router.post('/admin/add', [
+    check('email', 'Invalid Email Id').isEmail(), 
+    check('password', 'Password should be 6 charcters or more').isLength({min: 5}),
+    body('cpassword').custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error('Password confirmation does not match password');
+        }
+        
+        // Indicates the success of this synchronous custom validator
+        return true;
+      })   
+    ], (req, res) => {
+    const errors = validationResult(req).array();
+    if (errors.length > 0) {
+        return res.render('admin/add', {errors: errors});
+      }
+        var name = req.body.name,
         email = req.body.email,
         username = req.body.username,
         password = req.body.password,
         designation = "Teacher"
 
-    var newUser = new Teacher ({
-        name: name,
-        email: email,
-        username: username,
-        password: password,
-        designation: designation
-    });
+        var newUser = new Teacher ({
+            name: name,
+            email: email,
+            username: username,
+            password: password,
+            designation: designation
+        });
 
-    Teacher.createUser(newUser, function(err, user){
-        if(err) throw err;
+        Teacher.createUser(newUser, function(err, user){
+            if(err) throw err;
+            res.redirect('/admin');
     });
-    res.redirect('/admin');
 });
 
 
