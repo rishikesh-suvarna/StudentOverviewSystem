@@ -18,8 +18,11 @@
             <% if(file.contentType === 'image/jpeg' || file.contentType === 'image/png') { %>
                 <img src="/files/<%= file.filename %>" class="card-img-top" alt="">
             <% } else { %>
-                <a href="/files/<%= file.filename %>" target="_blank">Click Here for Test File</a>
+                <div class="mb-3">
+                    <a href="/files/<%= file.filename %>" target="_blank">Click Here for Test File</a>
+                </div>
             <% } %>
+            <a href="/students/viewtest/<%= file._id %>/answertest" class="btn btn-block btn-outline-primary">Answer This Test</a>
             </div>
           </div>
     </div>

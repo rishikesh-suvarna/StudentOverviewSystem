@@ -47,3 +47,20 @@ $("#eyecp").click(function(){
         $("#iconcp").addClass("fa-eye").removeClass("fa-eye-slash");
     }
 });
+
+
+$(document).ready(function(){
+    $(".hover").hover(
+        function(){
+            $(this).animate({
+                marginTop: "-=1%",
+            },200);
+        },
+
+        function(){
+            $(this).animate({
+                marginTop: "0%"
+            },200);
+        }
+    );
+});

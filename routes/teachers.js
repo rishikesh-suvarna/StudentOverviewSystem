@@ -11,6 +11,8 @@ Student           = require('../models/students'),
 Teacher           = require('../models/teachers'),
 middleware        = require('../middleware');
 
+eval(`Grid.prototype.findOne = ${Grid.prototype.findOne.toString().replace('nextObject', 'next')}`);
+
 const {check, validationResult, body} = require('express-validator');
 
 //<============================================ Database URI =================================================>
@@ -55,6 +57,8 @@ const storage = new GridFsStorage({
     }
 });
 const upload = multer({ storage });
+// =============================================================================================================>
+
 
 // <================================================= Routes ===================================================>
 
@@ -87,11 +91,11 @@ router.post('/teachers/add', [
     const errors = validationResult(req).array();
     if (errors.length > 0) {
         return res.render('teacher/add', {errors: errors});
-      }
-    var name = req.body.name,
-        email = req.body.email,
-        username = req.body.username,
-        password = req.body.password,
+      } else  {
+    var name = req.body.name.trim(),
+        email = req.body.email.trim(),
+        username = req.body.username.trim(),
+        password = req.body.password.trim(),
         teacher = req.user._id,
         designation = "Student";
 
@@ -107,18 +111,16 @@ router.post('/teachers/add', [
     Student.createUser(newStudent, function(err, student){
         if(err) throw err;
         else {
-            console.log("success");
             Teacher.findById(req.user._id, function(err, teacher){
                 teacher.myStudents.push(student);
                 teacher.save();
             });
             res.redirect('/teachers');
         }
-    });
+    }); }
 });
 
 router.get('/teachers/manage', middleware.isLoggedIn, (req, res) =>{
-    
     Teacher.findById(req.user._id).populate("myStudents").exec(function(err, foundStudent){
         if(err){
             console.log(err);
@@ -143,13 +145,17 @@ router.put('/teachers/manage/:id/edit', middleware.isLoggedIn, (req, res) => {
         if(err){
             console.log(err);
         } else {
-            console.log(updatedStudent);
+            req.flash('success', 'Successfully Updated Student');
             res.redirect('/teachers/manage');
         }
     });
 });
 
 router.delete('/teachers/manage/:id', middleware.isLoggedIn, (req, res) => {
+    Teacher.findById(req.user._id, (err, teacher) => {
+        teacher.myStudents.pull(req.params.id);
+        teacher.save();
+    });
     Student.findByIdAndDelete(req.params.id, (err) => {
         if(err){
             console.log(err);
@@ -213,7 +219,52 @@ router.get('/teachers/managetest', middleware.isLoggedIn, (req, res) => {
     });
 });
 
+router.get('/teachers/managetest/viewtest/:tid', middleware.isLoggedIn, (req, res) => {
+    const filesToShow = [];
+    gfs.findOne({_id: req.params.tid}, (err, questionFile) => {
+        Teacher.findOne({_id: req.user._id}, (err,  teacher) => {
+            gfs.files.find().toArray((err, files) => {
+                files.forEach(function(file){
+                    if(file.metadata.type === "Answer"){
+                        if(teacher.myStudents.includes(file.metadata.id)){
+                            if(file.metadata.tid == req.params.tid){
+                                filesToShow.push(file);
+                            }
+                        }
+                    } else {
+                    }
+                });
+                res.render('teacher/viewtest', {files: filesToShow, questionFile: questionFile});
+            });
+        });
+    });
+});
+
+router.delete('/teachers/managetest/viewtest/:id', middleware.isLoggedIn, (req, res) => {
+    // Finding file by params for the answer file: Params are of answer file not question file
+    gfs.findOne({_id: req.params.id}, (err, file) => {
+        // Finding student by metadata.id
+        Student.findById(file.metadata.id, (err, student) => {
+            // Removing question_id from student's array with the help of tid
+            student.questions.pull(file.metadata.tid);
+            student.save();
+        });
+    });
+    gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
+        if (err) {
+          return res.status(404).json({ err: err });
+        }
+        req.flash('success', 'Test deleted successfully!')
+        res.redirect('back');
+    });
+});
+
+
 router.delete('/teachers/managetest/:id', middleware.isLoggedIn, (req, res) => {
+    Teacher.findById(req.user._id, (err, teacher) => {
+        teacher.myTests.pull(req.params.id);
+        teacher.save();
+    });
     gfs.remove({ _id: req.params.id, root: 'uploads' }, (err, gridStore) => {
         if (err) {
           return res.status(404).json({ err: err });

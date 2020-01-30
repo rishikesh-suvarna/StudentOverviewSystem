@@ -24,8 +24,40 @@ html, body {
 .bg-text>p:nth-of-type(1) {
     font-size: 1.5rem;
 }
+/* ===================================================================== */
+
+.button {
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.2s;
+}
+
+.button span:after {
+    content: '\00bb\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.2s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
 
 
+/* ===================================================================== */
 @media(max-width: 500px){
     .bg-text {
         z-index: 1;

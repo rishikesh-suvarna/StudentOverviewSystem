@@ -7,7 +7,10 @@ var studentSchema = new mongoose.Schema({
     username: String,
     password: String,
     teacher: mongoose.Schema.Types.ObjectId,
-    designation: String
+    designation: String,
+    questions: [{
+        type: mongoose.Schema.Types.ObjectId,
+    }]
 });
 
 var User = module.exports = mongoose.model('student', studentSchema);

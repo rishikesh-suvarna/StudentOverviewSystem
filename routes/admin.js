@@ -63,10 +63,10 @@ router.post('/admin/add', [
     if (errors.length > 0) {
         return res.render('admin/add', {errors: errors});
       }
-        var name = req.body.name,
-        email = req.body.email,
-        username = req.body.username,
-        password = req.body.password,
+        var name = req.body.name.trim(),
+        email = req.body.email.trim(),
+        username = req.body.username.trim(),
+        password = req.body.password.trim(),
         designation = "Teacher"
 
         var newUser = new Teacher ({
@@ -110,6 +110,7 @@ router.put('/admin/manage/:id/edit', (req, res) => {
         if(err){
             console.log(err);
         }
+        req.flash('success', 'Successfully Updated Teacher');
         res.redirect("/admin/manage");
     });
     
@@ -154,6 +155,7 @@ router.delete('/admin/manage/:id', (req, res) => {
                     if(err){
                         console.log(err);
                     }
+                    // const i = foundTeacher.myStudents.indexOf(student._id)
                 });
             });
             foundTeacher.remove();
