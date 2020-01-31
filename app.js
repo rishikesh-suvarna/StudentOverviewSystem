@@ -26,7 +26,7 @@ mongoose.set('useUnifiedTopology', true);
 
 // Setting Up Express-session
 app.use(require("express-session")({
-    secret: "Once again Rusty wins cutest dog!",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }));

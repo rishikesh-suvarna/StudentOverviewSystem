@@ -43,7 +43,7 @@ router.post('/admin/login', (req, res) => {
 router.get('/admin/add', (req, res) => {
     const errors = [];
     adminStatus = true;
-    res.render('admin/add', {errors: false});
+    res.render('admin/add', {errors: false, formData: false});
 });
     
 
@@ -61,7 +61,16 @@ router.post('/admin/add', [
     ], (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) {
-        return res.render('admin/add', {errors: errors});
+        var name = req.body.name;
+        var email = req.body.email;
+        var username = req.body.username;
+    
+        var formData = {
+            name: name,
+            email: email,
+            username: username
+        }
+        return res.render('admin/add', {errors: errors, formData: formData});
       }
         var name = req.body.name.trim(),
         email = req.body.email.trim(),
@@ -76,11 +85,17 @@ router.post('/admin/add', [
             password: password,
             designation: designation
         });
-
-        Teacher.createUser(newUser, function(err, user){
-            if(err) throw err;
-            res.redirect('/admin');
-    });
+        Teacher.getUserByUsername(username, function(err, teacher){
+            if(teacher){
+                req.flash('error', 'Username is already registered');
+                return res.redirect('/admin/add');
+            } else {
+                Teacher.createUser(newUser, function(err, user){
+                if(err) throw err;
+                res.redirect('/admin');
+                });
+            }
+        });
 });
 
 

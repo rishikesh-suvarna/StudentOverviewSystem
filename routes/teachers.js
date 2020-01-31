@@ -73,8 +73,9 @@ router.post('/teachers/login', passport.authenticate('teacherLocal', {successRed
 });
 
 
-router.get('/teachers/add', middleware.isLoggedIn, (req, res) =>
-    res.render('teacher/add', {errors: false}));
+router.get('/teachers/add', middleware.isLoggedIn, (req, res) => {
+    res.render('teacher/add', {errors: false, formData: false});
+});
 
 router.post('/teachers/add', [
     check('email', 'Invalid Email Id').isEmail(), 
@@ -90,7 +91,16 @@ router.post('/teachers/add', [
     ], middleware.isLoggedIn, (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) {
-        res.render('teacher/add', {errors: errors});
+        var name = req.body.name;
+        var email = req.body.email;
+        var username = req.body.username;
+    
+        var formData = {
+            name: name,
+            email: email,
+            username: username
+        }
+        return res.render('teacher/add', {errors: errors, formData: formData});
       } else  {
     var name = req.body.name.trim(),
         email = req.body.email.trim(),
@@ -107,17 +117,24 @@ router.post('/teachers/add', [
         teacher: teacher,
         designation: designation
     });
-
-    Student.createUser(newStudent, function(err, student){
-        if(err) throw err;
-        else {
-            Teacher.findById(req.user._id, function(err, teacher){
-                teacher.myStudents.push(student);
-                teacher.save();
+    Student.getUserByUsername(username, (err, student) => {
+        if(student){
+            req.flash('error', 'Username is already registered');
+            return res.redirect('/teachers/add');
+        } else {
+            Student.createUser(newStudent, function(err, student){
+                if(err) throw err;
+                else {
+                    Teacher.findById(req.user._id, function(err, teacher){
+                        teacher.myStudents.push(student);
+                        teacher.save();
+                    });
+                    res.redirect('/teachers');
+                }
             });
-            res.redirect('/teachers');
         }
-    }); }
+    });
+     }
 });
 
 router.get('/teachers/manage', middleware.isLoggedIn, (req, res) =>{
@@ -135,7 +152,7 @@ router.get('/teachers/manage/:id/edit', middleware.isLoggedIn, (req, res) => {
         if(err){
             console.log(err);
         } else {
-            res.render('teacher/edit', {student: foundStudent});
+            res.render('teacher/edit', {errors: false, student: foundStudent});
         }
     });
 });

@@ -16,15 +16,27 @@
     <div class="col-md-6" style="float: none; margin: auto;">
         <form class="form-container" action="/admin/add" method="POST">
             <h1 class="mb-3" style="text-align: center;">Add New Teacher</h1>
-            <div class="input-group mb-3">
-                <input type="text" name="name" class="form-control" placeholder="Name" required>
-            </div>
-            <div class="input-group mb-3">
-                <input type="text" name="email" class="form-control" placeholder="Email" required>
-            </div>
-            <div class="input-group mb-3">
-                <input type="text" name="username" class="form-control" placeholder="Username" required>
-            </div>
+            <% if(!formData){ %>
+                <div class="input-group mb-3">
+                    <input type="text" name="name" class="form-control" placeholder="Name" required>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" name="email" class="form-control" placeholder="Email"  required>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" name="username" class="form-control" placeholder="Username"  required>
+                </div>
+            <% } else { %>
+                <div class="input-group mb-3">
+                    <input type="text" name="name" class="form-control" placeholder="Name" value="<%- formData.name %>" required>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" name="email" class="form-control" placeholder="Email" value="<%- formData.email %>" required>
+                </div>
+                <div class="input-group mb-3">
+                    <input type="text" name="username" class="form-control" placeholder="Username" value="<%- formData.username %>" required>
+                </div>
+            <% } %>
             <div class="input-group mb-3">
                 <input type="password" name="password" class="form-control" id="changep"  placeholder="Password" required>
                 <div class="input-group-append">
