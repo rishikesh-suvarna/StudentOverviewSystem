@@ -1,30 +1,79 @@
 html, body {
     width: 100%;
-    /* background: #fff; */
-    background: url("https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260") no-repeat;
-    font-family: 'Montserrat', sans-serif;
+    height: 100%;
 }
 
-.bg-text {
-    z-index: 1;
+#home {
+    background: url('https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+    display: table;
+    height: 100%;
+    width: 100%;
     position: relative;
+    background-size: cover;
+}
+
+.landing-text {
+    display: table-cell;
     text-align: center;
-    padding-top: 25vh;
+    vertical-align: middle;
 }
 
-.bg-text>h1 {
+.landing-text h1 {
+    font-size: 500%;
     font-weight: 600;
-    font-size: 8rem;
 }
 
-.bg-text>p {
-    font-size: 1rem;
+.padding {
+     padding: 80px 0;
 }
 
-.bg-text>p:nth-of-type(1) {
-    font-size: 1.5rem;
+#fixed1 {
+    background: url('https://images.pexels.com/photos/160107/pexels-photo-160107.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+    display: table;
+    height: 60%;
+    width: 100%;
+    background-size: cover;
+    position: relative;
 }
-/* ===================================================================== */
+
+#fixed2 {
+    background: url('https://images.pexels.com/photos/583846/pexels-photo-583846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+    display: table;
+    height: 60%;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+#fixed3 {
+    background: url('https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
+    display: table;
+    height: 60%;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+footer {
+    width: 100%;
+    background-color: #23415C;
+    padding: 5% 5% 7% 5%;
+    color: #fff;
+}
+
+.fab {
+    padding: 15px;
+    font-size: 25px;
+    color: white;
+}
+
+.fab:hover {
+    color: #d5d5d5;
+    text-decoration: none;
+}
+
+/* ======================================= Button Animation ============================================== */
+
 
 .button {
     transition: all 0.2s;
@@ -56,29 +105,79 @@ html, body {
     right: 0;
 }
 
-
-/* ===================================================================== */
-@media(max-width: 500px){
-    .bg-text {
-        z-index: 1;
-        position: relative;
-        text-align: center;
-        padding-top: 20vh;
-    } 
-    .bg-text>h1 {
-    font-size: 3.5rem;
-    }
-
-    .bg-text>a {
-       margin-top: 20px;
-    }
-
-    .bg-text>p {
-        display: none;
-        font-size: .8rem;
-    }
-    .bg-text>p:nth-of-type(1) {
-        font-size: .8rem;
-    }
-
+/* <==================================== Arrow Animation ============================================> */
+.arrow-down {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
+
+.arrow-down::after {
+    content: "";
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    margin: auto;
+    margin-top: 700px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-right: 4px solid #000;
+    border-bottom: 4px solid #000;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-animation: 3s arrow infinite ease;
+    animation: 3s arrow infinite ease;
+}
+
+@-webkit-keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+@keyframes arrow {
+    0%, 100% {
+        top: 50px;
+    }
+    50% {
+        top: 80px;
+    }
+}
+
+@media(max-width: 500px){
+    .landing-text h1 {
+        font-size: 400%;
+        font-weight: 600;
+        padding-bottom: 20px;
+    }
+
+    .landing-text p {
+        display: none;
+    }
+
+    .arrow-down::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        margin: auto;
+        margin-top: 500px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-right: 3px solid #000;
+        border-bottom: 3px solid #000;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        -webkit-animation: 3s arrow infinite ease;
+        animation: 3s arrow infinite ease;
+    }
+}
+
+/* ========================================================================================================= */

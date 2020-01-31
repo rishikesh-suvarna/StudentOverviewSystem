@@ -30,3 +30,21 @@ html, body {
     background-color: rgba(52,58,64,0.7);
 }
 
+
+.error {
+    display: block;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+}
+
+@media (max-width: 500px){
+    .error {
+        display: block;
+        margin-top: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+}

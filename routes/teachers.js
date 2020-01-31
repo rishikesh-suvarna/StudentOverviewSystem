@@ -90,7 +90,7 @@ router.post('/teachers/add', [
     ], middleware.isLoggedIn, (req, res) => {
     const errors = validationResult(req).array();
     if (errors.length > 0) {
-        return res.render('teacher/add', {errors: errors});
+        res.render('teacher/add', {errors: errors});
       } else  {
     var name = req.body.name.trim(),
         email = req.body.email.trim(),
