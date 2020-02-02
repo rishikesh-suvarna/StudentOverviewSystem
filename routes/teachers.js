@@ -7,6 +7,7 @@ mongoose          = require('mongoose'),
 GridFsStorage     = require('multer-gridfs-storage'),
 Grid              = require('gridfs-stream'),
 passport          = require('passport'),
+nodemailer        = require('nodemailer'),
 Student           = require('../models/students'),
 Teacher           = require('../models/teachers'),
 middleware        = require('../middleware');
@@ -57,8 +58,17 @@ const storage = new GridFsStorage({
     }
 });
 const upload = multer({ storage });
-// =============================================================================================================>
-
+// ============================================Nodemailer=================================================================>
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        type: 'login',
+        port: 465,
+        secure: true,
+        user: process.env.USER,
+        pass: process.env.PASS
+    }
+});
 
 // <================================================= Routes ===================================================>
 
@@ -122,6 +132,36 @@ router.post('/teachers/add', [
             req.flash('error', 'Username is already registered');
             return res.redirect('/teachers/add');
         } else {
+            const data = `
+            <div style="width: 40%; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                <h3>You're Successfully Added As A Student</h3>
+                <div style="text-align: center; padding: 20px;">
+                    <img src="https://cdn3.iconfinder.com/data/icons/education-2-2/256/Student_Reading-512.png" alt="student-img" style="width: 50%; border-radius: 50%; border: 2px solid black;">
+                </div>
+                <p>Here are your account details: </p>
+                <ul>
+                    <li>Name: ${name}</li>
+                    <li>Email: ${email}</li>
+                    <li>Username: ${username}</li>
+                </ul>
+                <p><strong>Note: </strong>For password contact your respective teacher</p>
+                <a href="https://ancient-oasis-06214.herokuapp.com/students/login">Click Here To Login</a>
+            </div>
+                `;
+                let mailOptions = {
+                    from: 'developer.rs2020@gmail.com',
+                    to: email,
+                    subject: 'Student Overview System',
+                    text: 'Account Created',
+                    html: data
+                }
+                transporter.sendMail(mailOptions, (err, data) => {
+                    if(err){
+                        console.log(err);
+                    } else {
+                        console.log("Sent!")
+                    }
+                });
             Student.createUser(newStudent, function(err, student){
                 if(err) throw err;
                 else {
@@ -129,6 +169,7 @@ router.post('/teachers/add', [
                         teacher.myStudents.push(student);
                         teacher.save();
                     });
+                    req.flash('success', 'Email has been sent!')
                     res.redirect('/teachers');
                 }
             });

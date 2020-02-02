@@ -106,12 +106,20 @@ router.post('/admin/add', [
                 return res.redirect('/admin/add');
             } else {
                 const data = `
-                    <h3>You're added as a Teacher</h3>
+                <div style="width: 40%; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                    <h3>You're Successfully Added As A Teacher</h3>
+                    <div style="text-align: center; padding: 20px;">
+                        <img src="https://i.pinimg.com/originals/cd/88/6e/cd886e4afd07dafeee0f1bc4872740f9.png" alt="teacher-img" style="width: 50%; border-radius: 50%; border: 2px solid black;">
+                    </div>
+                    <p>Here are your account details: </p>
                     <ul>
                         <li>Name: ${name}</li>
                         <li>Email: ${email}</li>
                         <li>Username: ${username}</li>
                     </ul>
+                    <p><strong>Note: </strong>For password contact admin</p>
+                    <a href="https://ancient-oasis-06214.herokuapp.com/teachers/login">Click Here To Login</a>
+                </div>
                 `;
                 let mailOptions = {
                     from: 'developer.rs2020@gmail.com',
