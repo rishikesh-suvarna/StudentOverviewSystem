@@ -3,6 +3,7 @@ var express = require("express"),
     mongoose          = require('mongoose'),
     GridFsStorage     = require('multer-gridfs-storage'),
     Grid              = require('gridfs-stream'),
+    nodemailer        = require('nodemailer'),
     Student = require('../models/students'),
     bcrypt = require('bcryptjs'),
     { check, validationResult, body } = require('express-validator'),
@@ -20,6 +21,18 @@ conn.once('open',() => {
     gfs.collection('uploads');
     // all set!
 });  
+
+// ======================================= Nodemailer ===========================================>
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        type: 'login',
+        user: process.env.USER,
+        pass: process.env.PASS
+    }
+});
+
+
 // <====================================== Routes ================================================>
 router.get('/admin', (req, res) => 
     res.render('admin/index'));
@@ -90,8 +103,31 @@ router.post('/admin/add', [
                 req.flash('error', 'Username is already registered');
                 return res.redirect('/admin/add');
             } else {
+                const data = `
+                    <h3>You're added as a Teacher</h3>
+                    <ul>
+                        <li>Name: ${name}</li>
+                        <li>Email: ${email}</li>
+                        <li>Username: ${username}</li>
+                    </ul>
+                `;
+                let mailOptions = {
+                    from: 'rishikesh.suvarna1997@gmail.com',
+                    to: 'rishikeshsuvarna@gmail.com',
+                    subject: 'Student Overview System',
+                    text: 'Account Created',
+                    html: data
+                }
+                transporter.sendMail(mailOptions, (err, data) => {
+                    if(err){
+                        console.log(err);
+                    } else {
+                        console.log("Sent!")
+                    }
+                });
                 Teacher.createUser(newUser, function(err, user){
                 if(err) throw err;
+                req.flash('success', 'Email has been sent!')
                 res.redirect('/admin');
                 });
             }

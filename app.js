@@ -13,6 +13,7 @@ const express         = require('express'),
     passport          = require('passport'),
     LocalStrategy     = require('passport-local'),
     methodOverride    = require('method-override'),
+    nodemailer        = require('nodemailer'),
     Student           = require('./models/students'),
     Teacher           = require('./models/teachers'),
     PORT              = process.env.PORT || 3000;   
