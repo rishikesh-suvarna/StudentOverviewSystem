@@ -51,7 +51,7 @@ var adminRoutes   = require('./routes/admin'),
     teacherRoutes = require('./routes/teachers'),
     studentRoutes = require('./routes/students');
 
-// <==========================================================Passport-Config===========================================>
+// <========================================================== Passport-Config ====================================================>
 passport.use('teacherLocal', new LocalStrategy(
     function(username, password, done){
       Teacher.getUserByUsername(username, function(err, teacher){

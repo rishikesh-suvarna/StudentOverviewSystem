@@ -9,6 +9,7 @@ html, body {
     display: table;
     height: 100%;
     width: 100%;
+    z-index: 1;
     position: relative;
     background-size: cover;
 }
@@ -32,6 +33,7 @@ html, body {
     background: url('https://images.pexels.com/photos/251225/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
     display: table;
     height: 60%;
+    z-index: 0;
     width: 100%;
     background-size: cover;
     position: relative;
@@ -41,6 +43,7 @@ html, body {
     background: url('https://images.pexels.com/photos/583846/pexels-photo-583846.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
     display: table;
     height: 60%;
+    z-index: 0;
     width: 100%;
     background-size: cover;
     position: relative;
@@ -50,6 +53,7 @@ html, body {
     background: url('https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
     display: table;
     height: 60%;
+    z-index: 0;
     width: 100%;
     background-size: cover;
     position: relative;
@@ -137,7 +141,7 @@ footer {
         top: 50px;
     }
     50% {
-        top: 80px;
+        top: 140px;
     }
 }
 
@@ -146,7 +150,7 @@ footer {
         top: 50px;
     }
     50% {
-        top: 80px;
+        top: 140px;
     }
 }
 
@@ -167,7 +171,7 @@ footer {
         height: 20px;
         position: absolute;
         margin: auto;
-        margin-top: 500px;
+        margin-top: 400px;
         top: 0;
         bottom: 0;
         left: 0;
