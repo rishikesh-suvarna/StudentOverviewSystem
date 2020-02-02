@@ -27,6 +27,8 @@ let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         type: 'login',
+        port: 465,
+        secure: true,
         user: process.env.USER,
         pass: process.env.PASS
     }
@@ -112,8 +114,8 @@ router.post('/admin/add', [
                     </ul>
                 `;
                 let mailOptions = {
-                    from: 'rishikesh.suvarna1997@gmail.com',
-                    to: 'rishikeshsuvarna@gmail.com',
+                    from: 'developer.rs2020@gmail.com',
+                    to: email,
                     subject: 'Student Overview System',
                     text: 'Account Created',
                     html: data
