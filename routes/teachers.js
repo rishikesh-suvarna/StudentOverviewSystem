@@ -356,7 +356,7 @@ router.delete('/teachers/managetest/:id', middleware.isLoggedIn, (req, res) => {
 
 // <================================================= API =====================================================>
 
-router.get('/files/:filename', (req, res) => {
+router.get('/files/:filename', middleware.isAPILoggedIn, (req, res) => {
     gfs.files.findOne({filename: req.params.filename}, (err, file) => {
         if(!file || file.length === 0) {
             res.status(404).json({

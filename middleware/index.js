@@ -17,6 +17,15 @@ middlewareObj.isStudentLoggedIn = function(req, res, next){
     res.redirect("/students/login");
 }
 
+middlewareObj.isAPILoggedIn = function(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.status(404).json({
+        err: 'You can\'t access this API'
+    });
+}
+
 middlewareObj.adminLogin = function(req, res, next){
     if(adminStaus){
         return next;

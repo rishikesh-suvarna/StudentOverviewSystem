@@ -9,8 +9,6 @@ html, body {
 }
 
 
-
-
 .form-container {
     background: #fff;
     padding: 30px;
@@ -38,6 +36,8 @@ html, body {
     margin-right: auto;
     width: 55%;
 }
+
+/* ========================================================================================================= */
 
 @media (max-width: 500px){
     .error {
