@@ -127,12 +127,12 @@ app.use(teacherRoutes);
 app.use(studentRoutes);
 
 
-app.get('*', (req, res) => {
-    // res.status(404).json({
-    //     err: 'Page Not Found'
-    // });
-    res.render('error');
-});
+// app.get('*', (req, res) => {
+//     // res.status(404).json({
+//     //     err: 'Page Not Found'
+//     // });
+//     res.render('error');
+// });
 
 
 

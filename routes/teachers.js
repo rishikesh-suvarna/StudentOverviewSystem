@@ -133,8 +133,9 @@ router.post('/teachers/add', [
             return res.redirect('/teachers/add');
         } else {
             const data = `
-            <div style="width: 40%; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-                <h3>You're Successfully Added As A Student</h3>
+            <div style="width: 450px; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                 <h1 style="text-align: center; text-decoration: underline;">Student Overview System</h1>
+                <h3 style="padding-top: 10px;">You're Successfully Added as a Student</h3>
                 <div style="text-align: center; padding: 20px;">
                     <img src="https://cdn3.iconfinder.com/data/icons/education-2-2/256/Student_Reading-512.png" alt="student-img" style="width: 50%; border-radius: 50%; border: 2px solid black;">
                 </div>
@@ -151,8 +152,7 @@ router.post('/teachers/add', [
                 let mailOptions = {
                     from: 'developer.rs2020@gmail.com',
                     to: email,
-                    subject: 'Student Overview System',
-                    text: 'Account Created',
+                    subject: 'Account Created',
                     html: data
                 }
                 transporter.sendMail(mailOptions, (err, data) => {
@@ -238,8 +238,30 @@ router.put('/teachers/manage/:id/resetpassword', middleware.isLoggedIn, (req, re
     var query = {_id: req.params.id}
     Student.findOne(query, (err, foundStudent) => {
         foundStudent.password = req.body.password;
+        var email = foundStudent.email;
         Student.resetPassword(foundStudent, function(err, user){
             if(err) throw err;
+        });
+        const data = `
+                <div style="width: 450px; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                    <h1 style="text-align: center; text-decoration: underline;">Student Overview System</h1>
+                    <h3 style="padding-top: 10px;">You're Password was reset Successfully!</h3>
+                    <p><strong>Note: </strong>For new password contact admin</p>
+                    <a href="https://ancient-oasis-06214.herokuapp.com/teachers/login">Click Here To Login</a>
+                </div>
+                `;
+        let mailOptions = {
+            from: 'Developer@StudentOverviewSystem.com',
+            to: email,
+            subject: 'Password Reset Succesful',
+            html: data
+        }
+        transporter.sendMail(mailOptions, (err, data) => {
+            if(err){
+                console.log(err);
+            } else {
+                console.log("Sent!")
+            }
         });
         req.flash("success", "Password Reset Successfully!")
         res.redirect('/teachers/manage');
