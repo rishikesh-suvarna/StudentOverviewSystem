@@ -247,7 +247,7 @@ router.put('/teachers/manage/:id/resetpassword', middleware.isLoggedIn, (req, re
                     <h1 style="text-align: center; text-decoration: underline;">Student Overview System</h1>
                     <h3 style="padding-top: 10px;">You're Password was reset Successfully!</h3>
                     <p><strong>Note: </strong>For new password contact admin</p>
-                    <a href="https://ancient-oasis-06214.herokuapp.com/teachers/login">Click Here To Login</a>
+                    <a href="https://ancient-oasis-06214.herokuapp.com/students/login">Click Here To Login</a>
                 </div>
                 `;
         let mailOptions = {
