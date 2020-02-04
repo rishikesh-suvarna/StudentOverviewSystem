@@ -1,7 +1,6 @@
 <%- include ("../partials/header") %> 
 <h1>All Tests</h1>
 
-
 <div class="row animated fadeIn fast">
     <% if(files) { %>
     <% files.forEach(function(file){ %>
@@ -25,9 +24,9 @@
                 </div>
             <% } %>
             <a href="/teachers/managetest/viewtest/<%= file._id %>" class="btn btn-block btn-outline-warning">View Test</a>
-                <form action="/teachers/managetest/<%= file._id %>?_method=DELETE" class="delete-form" method="POST">
-                    <button class="btn btn-outline-danger btn-block mt-3">Delete</button>
-                </form>
+            <form action="/teachers/managetest/<%= file._id %>?_method=DELETE" class="delete-form" method="POST">
+                <button class="btn btn-outline-danger btn-block mt-3">Delete</button>
+            </form>
             </div>
           </div>
     </div>
