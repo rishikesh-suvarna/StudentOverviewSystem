@@ -64,3 +64,34 @@ $(document).ready(function(){
         }
     );
 });
+
+
+// $( "#confirmdelete" ).on('click', function(){
+//     $('#deleteTarget').submit();
+// });
+
+
+
+// $('#deletebtn').on('click', function(e){
+//     e.preventDefault();
+//     confirm('Are you Sure?', function(sure){}, {
+//         title: 'Confirmation Dialog',
+//         hideRemove: true,
+//         btns: [
+//             {
+//                 label: 'OK',
+//                 onClick(cb){
+//                     return location.href = e.target
+//                 }
+//             },
+//             {
+//                 label: 'Cancel',
+//                 className: 'btn-secondary',
+//                 onClick(cb){
+//                     return e.preventDefault();
+//                 }
+//             }
+//         ]
+//     })
+// })
+

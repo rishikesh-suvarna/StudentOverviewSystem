@@ -2,7 +2,7 @@
 
 
 <div class="row animated fadeIn fast">
-    <% if(files) { %>
+    <% if(files && files.length>0) { %>
     <% files.forEach(function(file){ %>
     <div class="col-md-4">
         <div class="card border-dark mb-3" style="border-radius: 10px; box-shadow: 0px 0px 10px 0px #000;">
@@ -21,7 +21,7 @@
     </div>
     <% }); %>
     <% } else { %>
-    <h1 class="display-5">No Files to Show..</h1>
+        <h1 class="display-3">No Answers Submitted Yet..</h1>
     <% } %> 
 </div>
 <a href="/teachers/managetest/"><i class="fas fa-angle-left mt-3"></i>&nbsp;Go Back</a>

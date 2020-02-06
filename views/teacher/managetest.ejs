@@ -2,8 +2,8 @@
 <h1>All Tests</h1>
 
 <div class="row animated fadeIn fast">
-    <% if(files) { %>
-    <% files.forEach(function(file){ %>
+    <% if(files && files.length>0) { %>
+        <% files.forEach(function(file){ %>
 
     <div class="col-md-4">
         <div class="card border-dark mb-3" style="border-radius: 10px; box-shadow: 0px 0px 10px 0px #000;">
@@ -23,7 +23,7 @@
                     <a href="/files/<%= file.filename %>" target="_blank">Click Here for Test File</a>
                 </div>
             <% } %>
-            <a href="/teachers/managetest/viewtest/<%= file._id %>" class="btn btn-block btn-outline-warning">View Test</a>
+            <a href="/teachers/managetest/viewtest/<%= file._id %>" class="btn btn-block btn-outline-warning">View Answers</a>
             <form action="/teachers/managetest/<%= file._id %>?_method=DELETE" class="delete-form" method="POST">
                 <button class="btn btn-outline-danger btn-block mt-2">Delete</button>
             </form>
@@ -32,7 +32,7 @@
     </div>
     <% }) %>
     <% } else { %>
-    <h1 class="display-5">No Files to Show..</h1>
+    <h1 class="display-3 mt-3">No Files Available..</h1>
     <% } %> 
 </div>
 <a href="/teachers"><i class="fas fa-angle-left"></i>&nbsp;Go Back</a>

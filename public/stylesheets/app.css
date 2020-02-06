@@ -9,6 +9,9 @@ html, body {
     scroll-behavior: smooth;
 }
 
+.modal {
+    z-index: 999999;
+}
 
 .form-container {
     background: #fff;

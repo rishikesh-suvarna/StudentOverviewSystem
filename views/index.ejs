@@ -1,6 +1,6 @@
 <%- include ("./partials/header") %> 
 
-<div class="jumbotron animated fadeIn fast">
+<div class="jumbotron animated fadeIn delay-1s">
     <div class="container">
     <h1 class="display-4 "><i class="fas fa-chalkboard-teacher"></i>&nbsp;Student Overview System</h1>
     <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent semper interdum eros, at pellentesque lacus fermentum vitae. Morbi porta nibh.</p>
@@ -8,48 +8,52 @@
 </div>
 
 
+<!-- Admin: https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png -->
+<!-- Teacher: https://previews.123rf.com/images/tuktukdesign/tuktukdesign1802/tuktukdesign180200197/95917370-teacher-icon-vector-male-person-profile-avatar-with-a-book-and-teaching-in-school-college-or-univers.jpg -->
+<!-- Student: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ1TLNa9cA0CONWCEvzv4l5vSHyLy4GadK0gKlS_PINAzaQjUT&s -->
+
 <div class="row animated fadeInUp" style="text-align: center;">
     <div class="col-lg-4 mb-4 hover">
         <div class="card form-container">
-            <img src="https://pngimage.net/wp-content/uploads/2018/06/logo-admin-png-4.png" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">Admin's Login</h5>
-            <p class="card-text">Add & Manage Teachers..</p>
-            <a href="/admin/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            </div>
+        <img src="/images/adminVector.png" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">Admin's Login</h5>
+        <p class="card-text">Add & Manage Teachers..</p>
+        <a href="/admin/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
         </div>
     </div>
-    <div class="col-lg-4 mb-4 hover">
-        <div class="card form-container">
-            <img src="https://previews.123rf.com/images/tuktukdesign/tuktukdesign1802/tuktukdesign180200197/95917370-teacher-icon-vector-male-person-profile-avatar-with-a-book-and-teaching-in-school-college-or-univers.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">Teacher's Login</h5>
-            <p class="card-text">Add & Manage Students..</p>
-            <% if(!currentUser) { %>
-                <a href="/teachers/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            <% } else if(currentUser.designation === "Teacher") { %>
-                <a href="/teachers" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            <% } else { %>
-                <a href="/teachers/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            <% } %>
-            </div>
+</div>
+<div class="col-lg-4 mb-4 hover">
+    <div class="card form-container">
+        <img src="/images/teacherVector.png" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">Teacher's Login</h5>
+        <p class="card-text">Add & Manage Students..</p>
+        <% if(!currentUser) { %>
+            <a href="/teachers/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
+        <% } else if(currentUser.designation === "Teacher") { %>
+            <a href="/teachers" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
+        <% } else { %>
+            <a href="/teachers/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
+        <% } %>
         </div>
     </div>
-    <div class="col-lg-4 mb-4 hover">
-        <div class="card form-container">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ1TLNa9cA0CONWCEvzv4l5vSHyLy4GadK0gKlS_PINAzaQjUT&s" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h5 class="card-title">Student's Login</h5>
-            <p class="card-text">Complete Assignments & more..</p>
-            <% if(!currentUser) { %>
-                <a href="/students/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            <% } else if(currentUser.designation === "Student") { %>
-                <a href="/students" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            <% } else { %>
-                <a href="/students/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
-            <% } %>
-            </div>
+</div>
+<div class="col-lg-4 mb-4 hover">
+    <div class="card form-container">
+        <img src="/images/studentVector.png" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">Student's Login</h5>
+        <p class="card-text">Complete Assignments & more..</p>
+        <% if(!currentUser) { %>
+            <a href="/students/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
+        <% } else if(currentUser.designation === "Student") { %>
+            <a href="/students" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
+        <% } else { %>
+            <a href="/students/login" class="btn btn-primary btn-block">Login &nbsp; <i class="fas fa-sign-in-alt"></i></a>
+        <% } %>
         </div>
     </div>
+</div>
 </div>
 <%- include ("./partials/footer") %> 
