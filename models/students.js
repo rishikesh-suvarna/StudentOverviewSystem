@@ -10,6 +10,15 @@ var studentSchema = new mongoose.Schema({
     designation: String,
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
+    }],
+    attendanceP: [{
+        type: String
+    }],
+    attendanceA: [{
+        type: String
+    }],
+    attendanceEmail: [{
+        type: String
     }]
 });
 

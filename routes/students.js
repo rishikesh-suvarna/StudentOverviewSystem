@@ -108,6 +108,14 @@ router.post('/students/viewtest/:tid/answertest',  middleware.isStudentLoggedIn,
     res.redirect("/students/viewtest");
 });
 
+
+router.get('/students/viewattendance', (req, res) => {
+    Student.findById(req.user._id, (err, foundStudent) => {
+        res.render('student/viewattendance', {student: foundStudent});
+    });
+});
+
+
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/index')

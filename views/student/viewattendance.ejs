@@ -1,0 +1,44 @@
+<%- include ("../partials/header") %> 
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <h1 style="text-align: center;">Present Days</h1>
+        <table class="table table-light" style="text-align: center;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% student.attendanceP.forEach(function(date){ %>
+                <tr>
+                    <td class="table-active"><%= date %></td>
+                    <td class="table-success">Present</td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6 mb-3">
+        <h1 style="text-align: center;">Absent Days</h1>
+        <table class="table table-light" style="text-align: center;">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" style="text-align: center;">Date</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% student.attendanceA.forEach(function(date){ %>
+                <tr>
+                    <td class="table-active"><%= date %></td>
+                    <td class="table-danger">Absent</td>
+                </tr>
+            <% }); %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<%- include ("../partials/footer") %> 

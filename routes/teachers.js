@@ -134,10 +134,10 @@ router.post('/teachers/add', [
         } else {
             const data = `
             <div style="width: 450px; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-                 <h1 style="text-align: center; text-decoration: underline;">Student Overview System</h1>
+                <h1 style="text-align: center; text-decoration: underline;">Student Overview System</h1>
                 <h3 style="padding-top: 10px;">You're Successfully Added as a Student</h3>
                 <div style="text-align: center; padding: 20px;">
-                    <img src="https://cdn3.iconfinder.com/data/icons/education-2-2/256/Student_Reading-512.png" alt="student-img" style="width: 50%; border-radius: 50%; border: 2px solid black;">
+                    <img src="https://cdn3.iconfinder.com/data/icons/education-2-2/256/Student_Reading-512.png" alt="teacher-img" style="width: 50%; border-radius: 50%; border: 2px solid black;">
                 </div>
                 <p>Here are your account details: </p>
                 <ul>
@@ -353,6 +353,103 @@ router.delete('/teachers/managetest/:id', middleware.isLoggedIn, (req, res) => {
         res.redirect('/teachers/managetest');
     });
 });
+
+
+router.get('/teachers/addattendance', middleware.isLoggedIn, (req, res) => {
+    var date = new Date();
+    date = date.toDateString();
+    Teacher.findById(req.user._id).populate("myStudents").exec(function(err, foundStudent){
+        if(err){
+            console.log(err);
+        } else {
+            res.render('teacher/addattendance', {students: foundStudent, date: date});
+        }
+    });   
+});
+
+router.post('/teachers/addattendance/:sid/present', middleware.isLoggedIn, (req, res) => {
+    Student.findById(req.params.sid, (err, foundStudent) => {
+        var date = new Date();
+        var date = date.toDateString();
+        if(foundStudent.attendanceA.includes(date)){
+            foundStudent.attendanceA.pull(date);
+            foundStudent.attendanceP.push(date);
+        } else {
+            foundStudent.attendanceP.push(date);
+        }
+        foundStudent.save();
+        req.flash('success', 'Attendance added');
+        res.redirect('/teachers/addattendance');
+    });
+});
+
+router.post('/teachers/addattendance/:sid/absent', middleware.isLoggedIn, (req, res) => {
+    Student.findById(req.params.sid, (err, foundStudent) => {
+        var date = new Date();
+        var date = date.toDateString();
+        if(foundStudent.attendanceP.includes(date)){
+            foundStudent.attendanceP.pull(date);
+            foundStudent.attendanceA.push(date);
+        } else {
+            foundStudent.attendanceA.push(date);
+        }
+        foundStudent.save();
+        req.flash('success', 'Attendance added');
+        res.redirect('/teachers/addattendance');
+    });
+});
+
+router.get('/teachers/manageattendance', middleware.isLoggedIn, (req, res) => {
+    var date = new Date();
+    var date = date.toDateString();
+    const studentsToShow = [];
+    Teacher.findById(req.user._id).populate("myStudents").exec(function(err, foundStudent){
+        if(err){
+            console.log(err);
+        } else {
+            foundStudent.myStudents.forEach(function(student){
+                if(student.attendanceA.length > student.attendanceP.length){
+                    studentsToShow.push(student);
+                }
+            });
+            res.render('teacher/manageattendance', {students: studentsToShow, date: date});
+        }
+    }); 
+}); 
+
+router.post('/teachers/manageattendance/:sid/sendemail', middleware.isLoggedIn, (req, res) => {
+    var date = new Date();
+    var date = date.toDateString();
+    Student.findById(req.params.sid, async (err, foundStudent) => {
+        var email = foundStudent.email;
+        const data = `
+                <div style="width: 450px; border: 2px dotted black; padding: 30px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+                    <h1 style="text-align: center; text-decoration: underline;">Student Overview System</h1>
+                    <h3 style="padding-top: 10px;"><strong>You're Low on Attendance</strong></h3>
+                    <p><strong>Warning: </strong>Low attendance may affect your grades</p>
+                    <a href="https://ancient-oasis-06214.herokuapp.com/students/login">Click Here To Login</a>
+                </div>
+                `;
+        let mailOptions = {
+            from: 'Developer@StudentOverviewSystem.com',
+            to: email,
+            subject: 'Low on attendance',
+            html: data
+        }
+        await transporter.sendMail(mailOptions, (err, data) => {
+            if(err){
+                console.log(err);
+            } else {
+                console.log("Sent!")
+            }
+        });
+        await foundStudent.attendanceEmail.push(date);
+        await foundStudent.save();
+        req.flash('success', 'Low Attendance Email Sent');
+        res.redirect('/teachers/manageattendance');
+    });
+});
+
 
 // <================================================= API =====================================================>
 
