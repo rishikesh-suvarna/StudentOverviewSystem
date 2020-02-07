@@ -27,6 +27,7 @@ mongoose.set('useUnifiedTopology', true);
 
 // Setting Up Express-session
 app.use(require("express-session")({
+    cookie: { path: '/', httpOnly: true, maxAge: 36000000},
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false

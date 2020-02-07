@@ -14,7 +14,7 @@
                         <p class="card-text text-warning">Email on Low Attendance is already sent</p>
                     <% } else { %>
                         <form action="/teachers/manageattendance/<%= student._id %>/sendemail" method="POST">
-                            <button class="btn btn-outline-primary btn-block">Send Low Attendance Email</button>
+                            <button class="btn btn-outline-primary btn-block">Send Low Attendance Email&nbsp;&nbsp;<i class="fas fa-envelope"></i></button>
                         </form>
                     <% } %>
                 </div>
