@@ -33,6 +33,7 @@ html, body {
 #fixed1 {
     background: url('https://images.pexels.com/photos/251225/pexels-photo-251225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center fixed;
     display: table;
+    background-attachment: fixed;
     height: 60%;
     z-index: 0;
     width: 100%;
