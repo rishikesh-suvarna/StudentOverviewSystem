@@ -57,7 +57,17 @@ const storage = new GridFsStorage({
       });
     }
 });
-const upload = multer({ storage });
+const upload = multer({ storage,
+    // File Filter
+    fileFilter: function (req, file, callback) {
+        var ext = path.extname(file.originalname);
+        if(ext !== '.doc' && ext !== '.pdf' && ext !== '.txt' && ext !== '.docx') {
+            req.fileValidationError = 'goes wrong on the mimetype';
+            return callback(null, false, new Error('goes wrong on the mimetype'));
+            // return callback(new Error('Only Text files are allowed'))
+        }
+        callback(null, true)
+    } });
 // ============================================Nodemailer=================================================================>
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -273,6 +283,10 @@ router.get('/teachers/addtest', middleware.isLoggedIn, (req, res) => {
 });
 
 router.post('/teachers/addtest', middleware.isLoggedIn, upload.single('file'), (req, res) => {
+    if(req.fileValidationError) {
+        req.flash('error', 'Only .doc, .docx, .pdf, .txt files are allowed')
+        return res.redirect('back')
+  }
     Teacher.findById(req.user._id, (err, teacher) => {
         teacher.myTests.push(req.file.id);
         teacher.save();

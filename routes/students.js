@@ -109,7 +109,7 @@ router.post('/students/viewtest/:tid/answertest',  middleware.isStudentLoggedIn,
 });
 
 
-router.get('/students/viewattendance', (req, res) => {
+router.get('/students/viewattendance', middleware.isStudentLoggedIn, (req, res) => {
     Student.findById(req.user._id, (err, foundStudent) => {
         res.render('student/viewattendance', {student: foundStudent});
     });

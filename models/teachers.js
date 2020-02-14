@@ -46,7 +46,7 @@ module.exports.resetPassword = function(newUser, callback){
 }
 
 module.exports.getUserByUsername = function(username, callback){
-    var query = {username: username};
+    var query = {$or:[{username: username}, {email: username}]};
     User.findOne(query, callback);
 }
 
