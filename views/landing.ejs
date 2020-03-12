@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
         <link rel="stylesheet" href="/stylesheets/landing.css">
     </head>
@@ -34,10 +35,10 @@
         <div class="padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-6 text-center" data-aos="fade-right">
                         <img src="/images/adminVector.png" style="border-radius: 50%; width: 60%;" alt="">
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-6 text-center" data-aos="fade-left">
                         <h2>Admin</h2>
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, magni maiores neque tempore voluptates sapiente, doloribus repellendus impedit id voluptatibus illum vero itaque odit maxime.</p>
                     </div>
@@ -50,11 +51,11 @@
         <div class="padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 order-2 text-center">
+                    <div class="col-sm-6 order-2 text-center" data-aos="fade-right">
                         <h2>Teachers</h2>
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, magni maiores neque tempore voluptates sapiente, doloribus repellendus impedit id voluptatibus illum vero itaque odit maxime.</p>
                     </div>
-                    <div class="col-sm-6 order-1 order-md-2 text-center">
+                    <div class="col-sm-6 order-1 order-md-2 text-center" data-aos="fade-left">
                         <img style="width: 60%; border-radius: 50%;" src="/images/teacherVector.png" alt="">
                     </div>
                 </div>
@@ -66,10 +67,10 @@
         <div class="padding">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-6 text-center" data-aos="fade-right">
                         <img src="/images/studentVector.png" style="border-radius: 50%; width: 60%;" alt="">
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-sm-6 text-center" data-aos="fade-left">
                         <h2>Students</h2>
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, magni maiores neque tempore voluptates sapiente, doloribus repellendus impedit id voluptatibus illum vero itaque odit maxime.</p>
                     </div>
@@ -82,12 +83,12 @@
         <footer id="footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 text-center mb-2">
+                    <div class="col-md-4 text-center mb-2" data-aos="fade-right">
                         <h2>Contact Us</h2>
                         <p class="lead">Rishikesh Suvarna.</p>
                         <a class="lead" href="mailto:rishikeshsuvarna@gmail.com">rishikeshsuvarna@gmail.com</a>
                     </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center" data-aos="fade-up">
                         <h2>Connect</h2>
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -96,7 +97,7 @@
                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
                         <p>Lorem ipsum dolor sit amet.</p>
                     </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-4 text-center" data-aos="fade-left">
                         <h2>About Us</h2>
                         <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque quia accusamus magnam voluptatem minima sunt molestias, tenetur eligendi quam aperiam quisquam excepturi nesciunt, ex dolor, iure facere necessitatibus fugit assumenda.</p>
                     </div>
@@ -107,5 +108,13 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                // disable: 'mobile',
+                easing: 'ease',
+                duration: 800
+            });
+        </script>
     </body>
 </html>
