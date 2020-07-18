@@ -72,7 +72,7 @@ passport.use('teacherLocal', new LocalStrategy(
       })
 }));
 
-passport.use('studentLocal',new LocalStrategy(
+passport.use('studentLocal', new LocalStrategy(
     function(username, password, done){
       Student.getUserByUsername(username, function(err, student){
           if(err) throw err;
